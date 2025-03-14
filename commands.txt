@@ -1,0 +1,4 @@
+npm run build
+npm run dev
+npm run test-ga4
+npm run activate-pixel s2s-sandox.myshopify.com

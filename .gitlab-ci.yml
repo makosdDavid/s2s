@@ -1,0 +1,72 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  NODE_VERSION: "16"
+
+# Cache node_modules between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+# Install dependencies
+.install_deps: &install_deps
+  before_script:
+    - npm ci
+
+# Build the application
+build:
+  stage: build
+  image: node:${NODE_VERSION}
+  <<: *install_deps
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+
+# Test the application
+test:
+  stage: test
+  image: node:${NODE_VERSION}
+  <<: *install_deps
+  script:
+    - npm run test-ga4
+  dependencies:
+    - build
+
+# Deploy to production
+deploy:production:
+  stage: deploy
+  image: node:${NODE_VERSION}
+  <<: *install_deps
+  script:
+    - npm run build
+    - echo "Deploying to production server..."
+    # Add deployment steps here (e.g., SSH, rsync, etc.)
+  environment:
+    name: production
+    url: https://tomcsanyi.eu
+  only:
+    - main
+  when: manual
+
+# Deploy to staging
+deploy:staging:
+  stage: deploy
+  image: node:${NODE_VERSION}
+  <<: *install_deps
+  script:
+    - npm run build
+    - echo "Deploying to staging server..."
+    # Add deployment steps here (e.g., SSH, rsync, etc.)
+  environment:
+    name: staging
+    url: https://staging.tomcsanyi.eu
+  only:
+    - develop
+    - staging 

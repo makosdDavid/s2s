@@ -1,9 +1,32 @@
+<<<<<<< Updated upstream
 # s2s-proto
 
 
+=======
+# Server-to-Server (S2S) GA4 Tracking
 
-## Getting started
+This project implements a server-to-server (S2S) tracking solution that captures web events via Shopify web pixels and forwards them to Google Analytics 4 (GA4).
 
+## Features
+
+- Collects web events from Shopify stores using web pixels
+- Forwards events to Google Analytics 4 using the Measurement Protocol
+- Supports custom event mapping and transformation
+- Provides a simple API for testing and debugging
+- TypeScript implementation for type safety and better developer experience
+
+## Prerequisites
+
+- Node.js 16.x or higher
+- A Google Analytics 4 property with Measurement ID and API Secret
+- A Shopify store with admin API access
+
+## Installation
+>>>>>>> Stashed changes
+
+1. Clone the repository:
+
+<<<<<<< Updated upstream
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
 Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
@@ -91,3 +114,205 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+=======
+```bash
+git clone https://github.com/yourusername/s2s.git
+cd s2s
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Configure environment variables:
+
+Create a `env/dev.env` file with the following variables:
+
+```env
+GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+GA4_API_SECRET=your_api_secret
+GA4_STREAM_ID=your_stream_id
+
+# The endpoint where the GA4 server is running
+SERVER_ENDPOINT=https://your-domain.com/api/ga4/collect
+
+# Shopify API credentials
+SHOPIFY_ADMIN_API_ACCESS_TOKEN=your_access_token
+SHOPIFY_API_KEY=your_api_key
+SHOPIFY_API_SECRET_KEY=your_api_secret_key
+
+# Port for the GA4 endpoint server
+PORT=3000
+```
+
+## Usage
+
+### Development
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+This will start the server with hot reloading enabled.
+
+### Production
+
+Build the project:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm start
+```
+
+### Activating the Web Pixel
+
+To activate the web pixel on a Shopify store:
+
+```bash
+npm run activate-pixel your-store.myshopify.com
+```
+
+Replace `your-store.myshopify.com` with your actual Shopify store domain.
+
+## API Endpoints
+
+### POST /api/ga4/collect
+
+Endpoint for collecting GA4 events.
+
+**Request Body:**
+
+```json
+{
+  "client_id": "client_id_string",
+  "events": [
+    {
+      "name": "event_name",
+      "params": {
+        "param1": "value1",
+        "param2": "value2"
+      }
+    }
+  ]
+}
+```
+
+### POST /api/ga4/shopify
+
+Endpoint for processing Shopify events.
+
+**Request Body:**
+
+```json
+{
+  "name": "event_name",
+  "data": {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  "client_id": "client_id_string"
+}
+```
+
+### GET /api/ga4/test
+
+Endpoint for testing GA4 connection.
+
+## Web Pixel Extension
+
+The web pixel extension is located in the `extensions/s2s` directory. It collects events from Shopify stores and sends them to the server endpoint.
+
+### Configuration
+
+The web pixel extension can be configured with the following settings:
+
+- `accountID`: Your account identifier for tracking purposes
+- `enableDebug`: Set to true to enable debug console logs
+- `storeEventsInLocalStorage`: Set to true to store events in browser's localStorage
+
+## Deployment
+
+### Manual Deployment
+
+1. Build the project:
+
+```bash
+npm run build
+```
+
+2. Deploy the `dist` directory to your server.
+
+3. Set up environment variables on your server.
+
+4. Start the server:
+
+```bash
+npm start
+```
+
+### GitLab CI/CD
+
+This project can be deployed using GitLab CI/CD. Create a `.gitlab-ci.yml` file with the following configuration:
+
+```yaml
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: node:16
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+test:
+  stage: test
+  image: node:16
+  script:
+    - npm install
+    - npm test
+
+deploy:
+  stage: deploy
+  image: node:16
+  script:
+    - npm install
+    - npm run build
+    - # Add deployment steps here
+  only:
+    - main
+```
+
+## Future Enhancements
+
+- IMAP email sender based on GA4 data
+- Support for additional analytics platforms
+- Enhanced event transformation and filtering
+- User interface for configuration and monitoring
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+>>>>>>> Stashed changes

@@ -1,0 +1,31 @@
+name = "s2s"
+type = "web_pixel_extension"
+
+# This enables the strictest level of sandbox, which is recommended for production
+runtime_context = "strict"
+
+[settings]
+type = "object"
+
+[settings.fields.accountID]
+name = "Account ID"
+description = "Your account identifier for tracking purposes"
+type = "single_line_text_field"
+validations =  [
+  { name = "min", value = "1" }
+]
+
+[settings.fields.enableDebug]
+name = "Enable Debug Mode"
+description = "Set to true to enable debug console logs (enter 'true' or 'false')"
+type = "single_line_text_field"
+
+[settings.fields.storeEventsInLocalStorage]
+name = "Store Events in localStorage"
+description = "Set to true to store events in browser's localStorage (enter 'true' or 'false')"
+type = "single_line_text_field"
+
+[settings.fields.serverEndpoint]
+name = "Server Endpoint"
+description = "The endpoint where the GA4 server is running"
+type = "single_line_text_field"

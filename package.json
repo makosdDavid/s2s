@@ -1,0 +1,50 @@
+{
+  "name": "s2s",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "shopify": "shopify",
+    "build": "tsc && ts-node src/scripts/copy-static.ts",
+    "setup-tunnel": "ts-node src/scripts/setupTunnel.ts",
+    "dev": "npm run setup-tunnel && nodemon src/server.ts",
+    "start": "node dist/server.js",
+    "shopify:dev": "shopify app dev",
+    "shopify:dev:ngrok": "ts-node src/scripts/shopifyDev.ts",
+    "dev:all": "ts-node src/scripts/devWithNgrok.ts",
+    "shopify:build": "shopify app build",
+    "shopify:info": "shopify app info",
+    "shopify:generate": "shopify app generate",
+    "shopify:deploy": "shopify app deploy",
+    "activate-pixel": "ts-node src/scripts/activate-pixel.ts",
+    "test-ga4": "ts-node src/scripts/test-ga4.ts"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
+    "helmet": "^7.1.0",
+    "http-proxy-middleware": "^3.0.3",
+    "morgan": "^1.10.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.11.19",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "trustedDependencies": [
+    "@shopify/plugin-cloudflare"
+  ],
+  "author": "User",
+  "private": true,
+  "workspaces": [
+    "extensions/*"
+  ]
+}

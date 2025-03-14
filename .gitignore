@@ -1,0 +1,57 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment variables and secrets
+.env
+.env.*
+env/
+*.env
+!.env.example
+
+# Shopify CLI
+.shopify/
+*.extension.toml.lock
+
+# Build output
+dist/
+build/
+coverage/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+
+# Production secrets
+*.pem
+*.key
+credentials.json
+private_key.json
+
+# Shopify-specific
+.api_key
+.access_token
+.shopify-cli.yml
+
+# Local development
+.dev/
+.local/
+
+# Testing
+.nyc_output/
